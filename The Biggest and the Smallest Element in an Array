@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+void input(int *arr, int size, int index) {
+    if (index < size) {
+        scanf("%d", &arr[index]);
+
+        input(arr, size, index + 1);
+    }
+}
+
+
+int menor(int *arr, int size, int migr, int index) {
+    if (index == size) {
+        return migr;
+    }
+
+    if (arr[index] < migr) {
+        migr = arr[index];
+    }
+
+    return menor(arr, size, migr, index + 1);
+}
+
+
+int maior(int *arr, int size, int magr, int index) {
+    if (index == size) {
+        return magr;
+    }
+
+    if (arr[index] > magr) {
+        magr = arr[index];
+    }
+
+    return maior(arr, size, magr, index + 1);
+}
+
+int main() {
+    int arr[6];
+
+    input(arr, 6, 0);
+
+    int minus = menor(arr, 6, arr[0], 0);
+    int plus = maior(arr, 6, arr[0], 0);
+
+    printf("%d\n", minus);
+    printf("%d\n", plus);
+
+    return 0;
+}
