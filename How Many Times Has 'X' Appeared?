@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+void input(int a[], int b) {
+    if (b == 0) {
+        return;
+    }
+    scanf("%d", &a[b]); 
+
+    input(a, b - 1); 
+
+}
+
+void read(int a[], int b, int n, int *c) {
+    if (b == 0) {
+        return;
+    }
+
+    if (a[b] == n) { 
+        (*c)++;
+    }
+
+    read(a, b - 1, n, c);
+
+}
+
+int main() {
+
+    int a[10];
+    int b = 10;
+    int c = 0;
+
+    input(a, b);
+
+    int n;
+    scanf("%d", &n);
+
+    read(a, b, n, &c);
+
+    printf("%d", c);
+
+    return 0;
+}
