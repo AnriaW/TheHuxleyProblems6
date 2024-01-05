@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX 10000
+
+int lig[MAX];
+bool visita[MAX];
+
+void find(int buraco) {
+    if (visita[buraco]) {
+        return; 
+    }
+    visita[buraco] = true;
+    find(lig[buraco]);
+}
+
+int contag(int N, int i, int buraco) {
+    if (i == N) {
+        return buraco;
+    }
+    if (!visita[i]) {
+        find(i);
+        buraco++;
+    }
+    return contag(N, i + 1, buraco);
+}
+
+void input(int N, int i) {
+    if (i == N) {
+        return;
+    }
+    scanf("%d", &lig[i]);
+    visita[i] = false;
+    input(N, i + 1);
+}
+
+int main() {
+    int N;
+    scanf("%d", &N);
+
+    input(N, 0);
+
+    int buraco = contag(N, 0, 0);
+    printf("%d\n", buraco);
+
+    return 0;
+}
